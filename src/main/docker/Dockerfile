@@ -1,12 +1,17 @@
 FROM gradle:8.5-jdk21 AS build
 WORKDIR /app
 COPY . .
-RUN gradle build
+RUN chmod +x ./gradlew
+RUN ./gradlew build
 
-COPY --chown=185 build/quarkus-app/lib/ /deployments/lib/
-COPY --chown=185 build/quarkus-app/*.jar /deployments/
-COPY --chown=185 build/quarkus-app/app/ /deployments/app/
-COPY --chown=185 build/quarkus-app/quarkus/ /deployments/quarkus/
+FROM registry.access.redhat.com/ubi9/openjdk-21-runtime:1.24
+
+ENV LANGUAGE='en_US:en'n
+
+COPY --from=build --chown=185 /app/build/quarkus-app/lib/ lib/
+COPY --from=build --chown=185 /app/build/quarkus-app/*.jar ./
+COPY --from=build --chown=185 /app/build/quarkus-app/app/ app/
+COPY --from=build --chown=185 /app/build/quarkus-app/quarkus/ quarkus/
 
 EXPOSE 8080
 USER 185

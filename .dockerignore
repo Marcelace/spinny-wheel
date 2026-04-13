@@ -1,5 +1,11 @@
-*
-!build/*-runner
-!build/*-runner.jar
-!build/lib/*
-!build/quarkus-app/*
+# Ignore build output
+build/
+.gradle/
+
+# Ignore IDE stuff
+.idea/
+*.iml
+
+# Ignore git
+.git/
+.gitignore
