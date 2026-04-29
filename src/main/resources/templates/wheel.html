@@ -6,25 +6,9 @@
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'>
     </script>
-    <style>
-        #canvasContainer {
-            position: relative;
-            width: 600px;
-        }
-
-        #canvas {
-            z-index: 1;
-        }
-
-        #prizePointer {
-            position: absolute;
-            left: 100%;
-            top: 50%;
-            transform: translate(-25%, -50%);
-            z-index: 999;
-        }
-
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/style/wheel.css">
 </head>
 <body>
 
@@ -34,37 +18,51 @@
     <canvas id="canvas" width="600" height="600">
         Canvas not supported, please user another browser.
     </canvas>
-    <img id="prizePointer" src="/img/pointer.png" alt="V"/>
+    <div id="prizePointer"></div>
 </div>
 
 <script>
-    const segments = {rules.raw};
-    console.log(segments);
-    console.log(segments[0]);
-
-    const coloredSegments = segments.map((segment, i) => {
-            const hue = (i * 360) / segments.length;
-            return {
-                ...segment,
-                fillStyle: "hsl(" + hue + ", 70%, 60%)"
-            };
-        }
-    )
-
-    let theWheel = new Winwheel({
-        'numSegments': coloredSegments.length,
-        'segments': coloredSegments,
-        'animation':                   // Note animation properties passed in constructor parameters.
-            {
-                'type': 'spinToStop',  // Type of animation.
-                'duration': 5,             // How long the animation is to take in seconds.
-                'spins': 8              // The number of complete 360 degree rotations the wheel is to do.
-            }
-    });
+    window.segments = {rules.raw};
 </script>
-
-<button onClick="theWheel.rotationAngle = 0;
+<script src="/js/myWheel.js"></script>
+<button class="btn btn-primary" onClick="theWheel.rotationAngle = 0;
     theWheel.startAnimation();">Spin the Wheel
 </button>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newRuleModal">
+    Add Rule
+</button>
+
+<div class="modal" id="newRuleModal" tabindex="-1" role="dialog">
+    <div id="formMessage" class="alert alert-success d-none"></div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add a new rule</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="newRuleForm">
+                    <div class="form-group">
+                        <label for="ruleName">Rule Name</label>
+                        <input type="text" class="form-control" id="ruleName" aria-describedby="ruleHelp" placeholder="Enter rule name">
+                        <small id="ruleHelp" class="form-text text-muted">Text you will see on the wheel</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="ruleDescription">Rule Description</label>
+                        <textarea class="form-control" id="ruleDescription" rows="6"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="submitRuleBtn" class="btn btn-primary">Submit</button>
+                <button type="button" id="closeRuleModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/rule.js"></script>
 </body>
 </html>

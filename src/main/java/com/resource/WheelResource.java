@@ -13,7 +13,7 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Map;
 
-@Path("/wheel")
+@Path("/")
 public class WheelResource {
 
     @Inject
@@ -21,7 +21,7 @@ public class WheelResource {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance hello() throws JsonProcessingException {
+    public TemplateInstance getWheel() throws JsonProcessingException {
         List<String> test = List.of("Springer ziehen wie Bauern", "Könige können 2 mal ziehen");
         List<Map<String, String>> rules = test.stream()
                 .map(r -> Map.of("text", r))
