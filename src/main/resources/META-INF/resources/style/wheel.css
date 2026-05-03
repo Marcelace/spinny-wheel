@@ -1,6 +1,26 @@
+body {
+    background-image: url("/img/chess.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.wheel-wrapper {
+    position: relative;
+    width: 600px;
+    margin: 0 auto;
+}
+
 #canvasContainer {
     position: relative;
     width: 600px;
+}
+
+.spin-btn {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(200px, -50%);
 }
 
 #canvas {
@@ -35,5 +55,9 @@
     width: 30px;
     height: 25px;
     background: black;
+}
+
+#mainHeader {
+    color: yellow;
 }
 

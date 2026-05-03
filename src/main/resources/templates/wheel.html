@@ -12,22 +12,23 @@
 </head>
 <body>
 
-<h1>SPIN THE WHEEL!</h1>
+<h1 id="mainHeader">SPIN THE WHEEL!</h1>
 
-<div id="canvasContainer">
-    <canvas id="canvas" width="600" height="600">
-        Canvas not supported, please user another browser.
-    </canvas>
-    <div id="prizePointer"></div>
+<div class="wheel-wrapper">
+    <div id="canvasContainer">
+        <canvas id="canvas" width="600" height="600"></canvas>
+        <div id="prizePointer"></div>
+    </div>
+    <script>
+        window.segments = {rules.raw};
+    </script>
+    <script src="/js/myWheel.js"></script>
+
+    <button class="btn btn-primary btn-lg spin-btn"
+            onClick="theWheel.rotationAngle = 0; theWheel.startAnimation();">
+        Spin the Wheel
+    </button>
 </div>
-
-<script>
-    window.segments = {rules.raw};
-</script>
-<script src="/js/myWheel.js"></script>
-<button class="btn btn-primary" onClick="theWheel.rotationAngle = 0;
-    theWheel.startAnimation();">Spin the Wheel
-</button>
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newRuleModal">
     Add Rule
 </button>
@@ -46,7 +47,8 @@
                 <form id="newRuleForm">
                     <div class="form-group">
                         <label for="ruleName">Rule Name</label>
-                        <input type="text" class="form-control" id="ruleName" aria-describedby="ruleHelp" placeholder="Enter rule name">
+                        <input type="text" class="form-control" id="ruleName" aria-describedby="ruleHelp"
+                               placeholder="Enter rule name">
                         <small id="ruleHelp" class="form-text text-muted">Text you will see on the wheel</small>
                     </div>
                     <div class="form-group">
@@ -57,7 +59,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="submitRuleBtn" class="btn btn-primary">Submit</button>
-                <button type="button" id="closeRuleModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="closeRuleModal" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                </button>
             </div>
         </div>
     </div>
