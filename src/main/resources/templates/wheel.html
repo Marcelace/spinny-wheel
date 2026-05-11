@@ -33,6 +33,31 @@
     Add Rule
 </button>
 
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <h5 class="modal-title">🎉 Result</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <h4 id="resultText" class="fw-bold mb-3"></h4>
+
+                <h5 class="mt-3">Rule Description</h5>
+
+                <p id="resultDescription" class="text-muted"></p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal" id="newRuleModal" tabindex="-1" role="dialog">
     <div id="formMessage" class="alert alert-success d-none"></div>
     <div class="modal-dialog modal-dialog-centered" role="document">

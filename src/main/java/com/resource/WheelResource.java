@@ -1,5 +1,6 @@
 package com.resource;
 
+import com.domain.Rule;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.qute.Template;
@@ -10,6 +11,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +24,16 @@ public class WheelResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance getWheel() throws JsonProcessingException {
-        List<String> test = List.of("Springer ziehen wie Bauern", "Könige können 2 mal ziehen");
-        List<Map<String, String>> rules = test.stream()
-                .map(r -> Map.of("text", r))
+        List<Rule> ruleList = new ArrayList<>();
+        Rule rule1 = new Rule("BauerSpringer", "Springer ziehen wie Bauern");
+        Rule rule2 = new Rule("Superkönig", "Könige können 2 mal ziehen");
+        ruleList.add(rule1);
+        ruleList.add(rule2);
+        List<Map<String, String>> rules = ruleList.stream()
+                .map(r -> Map.of(
+                        "text", r.getName(),
+                        "description", r.getDescription()
+                ))
                 .toList();
         String rulesJson = new ObjectMapper().writeValueAsString(rules);
         return wheel.data("rules", rulesJson);

@@ -1,6 +1,6 @@
 package com.dto;
 
-public class Rule {
+public class RuleDTO {
     public String name;
     public String description;
 }

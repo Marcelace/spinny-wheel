@@ -1,6 +1,4 @@
 let segments = window.segments;
-console.log(segments);
-console.log(segments[0]);
 
 const coloredSegments = segments.map((segment, i) => {
         const hue = (i * 360) / segments.length;
@@ -28,6 +26,14 @@ function alertPrize()
 {
     // Call getIndicatedSegment() function to return pointer to the segment pointed to on wheel.
     let winningSegment = theWheel.getIndicatedSegment();
-    // Basic alert of the segment text which is the prize name.
-    alert("You have won " + winningSegment.text + "!");
+    const resultText = document.getElementById("resultText");
+    resultText.textContent = winningSegment.text;
+    const resultDescription = document.getElementById("resultDescription");
+    resultDescription.textContent = winningSegment.description;
+
+    const modal = new bootstrap.Modal(document.getElementById("resultModal"));
+    modal.show();
+
+
+
 }
