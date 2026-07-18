@@ -26,6 +26,7 @@ document.getElementById("submitRuleBtn").addEventListener("click", async functio
             msg.textContent = "Rule created successfully!";
             msg.classList.remove("d-none");
             document.getElementById("newRuleForm").reset();
+            addSegment(ruleName, ruleDescription)
         } else {
             const errorText = await response.text();
             alert("Failed to submit rule: " + errorText);
@@ -47,10 +48,3 @@ modalEl.addEventListener("hidden.bs.modal", function () {
     msg.classList.add("d-none");
     msg.textContent = "";
 });
-
-modalEl.addEventListener("hidden.bs.modal", function () {
-    const msg = document.getElementById("formMessage");
-    msg.classList.add("d-none");
-    msg.textContent = "";
-});
-

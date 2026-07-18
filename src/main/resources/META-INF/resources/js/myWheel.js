@@ -33,7 +33,9 @@ function alertPrize()
 
     const modal = new bootstrap.Modal(document.getElementById("resultModal"));
     modal.show();
+}
 
-
-
+function addSegment(rule, ruleDescription) {
+    theWheel.addSegment({'text': rule, 'description': ruleDescription}, 1);
+    theWheel.draw();
 }

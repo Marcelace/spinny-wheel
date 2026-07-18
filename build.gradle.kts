@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     java
     id("io.quarkus")
@@ -19,6 +21,8 @@ dependencies {
     implementation("io.quarkus:quarkus-qute")
     implementation("io.quarkus:quarkus-rest-qute")
     implementation("io.quarkus:quarkus-rest-jackson")
+    implementation("io.quarkus:quarkus-hibernate-orm-panache")
+    implementation("io.quarkus:quarkus-jdbc-postgresql")
     testImplementation("io.quarkus:quarkus-junit")
     testImplementation("io.rest-assured:rest-assured")
 }

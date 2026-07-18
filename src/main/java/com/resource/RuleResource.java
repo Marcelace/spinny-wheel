@@ -1,6 +1,8 @@
 package com.resource;
 
 import com.dto.RuleDTO;
+import com.service.RuleService;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
@@ -13,8 +15,12 @@ import jakarta.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class RuleResource {
 
+    @Inject
+    RuleService ruleService;
+
     @POST
     public Response createRule(RuleDTO ruleDTO) {
+        ruleService.createRule(ruleDTO);
         return Response.ok().build();
     }
 }
