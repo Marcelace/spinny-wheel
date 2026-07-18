@@ -24,11 +24,7 @@ public class WheelResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance getWheel() throws JsonProcessingException {
-        List<Rule> ruleList = new ArrayList<>();
-        Rule rule1 = new Rule("BauerSpringer", "Springer ziehen wie Bauern");
-        Rule rule2 = new Rule("Superkönig", "Könige können 2 mal ziehen");
-        ruleList.add(rule1);
-        ruleList.add(rule2);
+        List<Rule> ruleList = Rule.listAll();
         List<Map<String, String>> rules = ruleList.stream()
                 .map(r -> Map.of(
                         "text", r.getName(),
