@@ -32,6 +32,9 @@
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newRuleModal">
     Add Rule
 </button>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteRuleModal">
+    Delete Rule
+</button>
 
 <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
@@ -87,6 +90,46 @@
                 <button type="button" id="closeRuleModal" class="btn btn-secondary" data-bs-dismiss="modal">Close
                 </button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="deleteRuleModal" tabindex="-1" role="dialog">
+    <div id="deleteFormMessage" class="alert alert-success d-none"></div>
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Rule</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="deleteRuleForm">
+
+                    <div class="form-group">
+                        <label for="ruleSelectDeletion">Select Rule</label>
+                        <select class="form-control" id="ruleSelectDeletion">
+                            <option value="" selected disabled>Choose a rule...</option>
+
+                        </select>
+                    </div>h
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="deleteRuleBtn" class="btn btn-danger">
+                    Delete
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
+
         </div>
     </div>
 </div>

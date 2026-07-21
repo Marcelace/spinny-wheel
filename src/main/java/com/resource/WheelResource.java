@@ -1,6 +1,7 @@
 package com.resource;
 
 import com.domain.Rule;
+import com.dto.RuleDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.qute.Template;
@@ -11,9 +12,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Path("/")
 public class WheelResource {
@@ -24,14 +23,17 @@ public class WheelResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance getWheel() throws JsonProcessingException {
-        List<Rule> ruleList = Rule.listAll();
-        List<Map<String, String>> rules = ruleList.stream()
-                .map(r -> Map.of(
-                        "text", r.getName(),
-                        "description", r.getDescription()
+        List<RuleDTO> rules = Rule.<Rule>listAll()
+                .stream()
+                .map(r -> new RuleDTO(
+                        r.id,
+                        r.getName(),
+                        r.getDescription()
                 ))
                 .toList();
+
         String rulesJson = new ObjectMapper().writeValueAsString(rules);
+
         return wheel.data("rules", rulesJson);
     }
 }

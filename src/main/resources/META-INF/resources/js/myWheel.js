@@ -35,7 +35,12 @@ function alertPrize()
     modal.show();
 }
 
-function addSegment(rule, ruleDescription) {
-    theWheel.addSegment({'text': rule, 'description': ruleDescription}, 1);
+function addSegment(rule) {
+    const segment = {
+        text: rule.text,
+        description: rule.description
+    };
+
+    theWheel.addSegment(segment, 1);
     theWheel.draw();
 }

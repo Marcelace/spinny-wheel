@@ -8,7 +8,7 @@ document.getElementById("submitRuleBtn").addEventListener("click", async functio
     }
 
     const ruleData = {
-        name: ruleName,
+        text: ruleName,
         description: ruleDescription
     };
 
@@ -22,11 +22,13 @@ document.getElementById("submitRuleBtn").addEventListener("click", async functio
         });
 
         if (response.ok) {
+            const createdRule = await response.json();
             const msg = document.getElementById("formMessage");
             msg.textContent = "Rule created successfully!";
             msg.classList.remove("d-none");
             document.getElementById("newRuleForm").reset();
-            addSegment(ruleName, ruleDescription)
+            window.segments.push(createdRule);
+            addSegment(createdRule)
         } else {
             const errorText = await response.text();
             alert("Failed to submit rule: " + errorText);
@@ -48,3 +50,46 @@ modalEl.addEventListener("hidden.bs.modal", function () {
     msg.classList.add("d-none");
     msg.textContent = "";
 });
+
+
+const deleteModal = document.getElementById("deleteRuleModal");
+
+deleteModal.addEventListener("show.bs.modal", populateDeleteModal);
+
+document.getElementById("deleteRuleBtn").addEventListener("click", async function () {
+    const selectedRuleId = Number(
+        document.getElementById("ruleSelectDeletion").value
+    );
+
+    try {
+        const response = await fetch(`/rules/${selectedRuleId}`, {
+            method: "DELETE"
+        });
+
+        if (response.ok) {
+            window.segments = window.segments.filter(
+                rule => rule.id !== selectedRuleId
+            );
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+function populateDeleteModal() {
+    const select = document.getElementById("ruleSelectDeletion");
+
+    // Keep the placeholder
+    select.innerHTML = `
+        <option value="" selected disabled>Choose a rule...</option>
+    `;
+
+    window.segments.forEach(rule => {
+        const option = document.createElement("option");
+        option.textContent = rule.text;
+        option.value = rule.id;
+
+        select.appendChild(option);
+    });
+}
