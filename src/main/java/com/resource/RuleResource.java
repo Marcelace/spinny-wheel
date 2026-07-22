@@ -18,8 +18,9 @@ public class RuleResource {
 
     @POST
     public Response createRule(RuleDTO ruleDTO) {
-        Rule createdRule = ruleService.createRule(ruleDTO.text, ruleDTO.description);
-        RuleDTO createdRuleDTO = new RuleDTO(createdRule.id, createdRule.name, createdRule.description);
+        Rule createdRule = ruleService.createRule(ruleDTO.getText(), ruleDTO.getDescription());
+        RuleDTO createdRuleDTO = new RuleDTO(
+                createdRule.id, createdRule.getName(), createdRule.getDescription());
         return Response
                 .status(Response.Status.CREATED)
                 .entity(createdRuleDTO)
@@ -30,6 +31,13 @@ public class RuleResource {
     @DELETE
     public Response deleteRule(@PathParam("id") Long id) {
         ruleService.deleteRule(id);
+        return Response.ok().build();
+    }
+
+    @Path("/{id}")
+    @PUT
+    public Response updateRule(@PathParam("id") Long id, RuleDTO ruleDTO) {
+        ruleService.updateRule(id, ruleDTO);
         return Response.ok().build();
     }
 }

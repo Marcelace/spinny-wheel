@@ -1,3 +1,4 @@
+populateRuleList();
 document.getElementById("submitRuleBtn").addEventListener("click", async function () {
     const ruleName = document.getElementById("ruleName").value.trim();
     const ruleDescription = document.getElementById("ruleDescription").value.trim();
@@ -28,7 +29,8 @@ document.getElementById("submitRuleBtn").addEventListener("click", async functio
             msg.classList.remove("d-none");
             document.getElementById("newRuleForm").reset();
             window.segments.push(createdRule);
-            addSegment(createdRule)
+            addSegment(createdRule);
+            populateRuleList();
         } else {
             const errorText = await response.text();
             alert("Failed to submit rule: " + errorText);
@@ -92,4 +94,57 @@ function populateDeleteModal() {
 
         select.appendChild(option);
     });
+}
+
+function populateRuleList() {
+    const list = document.getElementById("ruleList");
+    list.innerHTML = "";
+
+    window.segments.forEach(rule => {
+        const item = document.createElement("button");
+
+        item.className =
+            "list-group-item list-group-item-action";
+
+        item.textContent = rule.text;
+
+        item.addEventListener("click", () => openRuleModal(rule));
+
+        list.appendChild(item);
+    });
+}
+
+function openRuleModal(rule) {
+
+    document.getElementById("editRuleTitle")
+        .textContent = rule.text;
+
+    document.getElementById("editDescription")
+        .value = rule.description;
+
+    document.getElementById("saveRuleBtn")
+        .onclick = async () => {
+        rule.description =
+            document.getElementById("editDescription").value;
+
+        await updateRule(rule);
+        window.location.reload();
+    };
+
+    const modalElement = document.getElementById("editRuleModal");
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+    modal.show();
+}
+async function updateRule(rule) {
+    const response = await fetch(`/rules/${rule.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(rule)
+    });
+
+    if (!response.ok) {
+        console.error("Failed to update rule");
+    }
 }

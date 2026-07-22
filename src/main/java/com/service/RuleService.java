@@ -1,6 +1,7 @@
 package com.service;
 
 import com.domain.Rule;
+import com.dto.RuleDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
@@ -17,5 +18,13 @@ public class RuleService {
     @Transactional
     public void deleteRule(Long id) {
         Rule.deleteById(id);
+    }
+
+    @Transactional
+    public void updateRule(Long id, RuleDTO ruleDTO) {
+        Rule rule = Rule.findById(id);
+        rule.setName(ruleDTO.getText());
+        rule.setDescription(ruleDTO.getDescription());
+        rule.persist();
     }
 }
