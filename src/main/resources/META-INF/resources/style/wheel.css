@@ -1,5 +1,5 @@
 body {
-    background-image: url("/img/chess.jpg");
+    background-image: url("/img/chess2.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -30,8 +30,8 @@ body {
 }
 
 #ruleList {
-    max-height: 700px;
-}
+    max-height: 80vh;}
+
 
 .wheel-wrapper {
     position: relative;
