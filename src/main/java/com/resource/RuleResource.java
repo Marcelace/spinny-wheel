@@ -3,6 +3,7 @@ package com.resource;
 import com.domain.Rule;
 import com.dto.RuleDTO;
 import com.service.RuleService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -16,6 +17,7 @@ public class RuleResource {
     @Inject
     RuleService ruleService;
 
+    @RolesAllowed("admin")
     @POST
     public Response createRule(RuleDTO ruleDTO) {
         Rule createdRule = ruleService.createRule(ruleDTO.getText(), ruleDTO.getDescription());
@@ -27,6 +29,7 @@ public class RuleResource {
                 .build();
     }
 
+    @RolesAllowed("admin")
     @Path("/{id}")
     @DELETE
     public Response deleteRule(@PathParam("id") Long id) {
@@ -34,6 +37,7 @@ public class RuleResource {
         return Response.ok().build();
     }
 
+    @RolesAllowed("admin")
     @Path("/{id}")
     @PUT
     public Response updateRule(@PathParam("id") Long id, RuleDTO ruleDTO) {
