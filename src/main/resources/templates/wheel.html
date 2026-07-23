@@ -12,40 +12,39 @@
 </head>
 <body>
 
-<h1 id="mainHeader">SPIN THE WHEEL!</h1>
+<div class="main-content">
+    <div class="card rule-card">
+        <div class="card-header rule-header">
+            📜 Current Rules
+        </div>
 
-<div class="wheel-wrapper">
-    <div id="canvasContainer">
-        <canvas id="canvas" width="600" height="600"></canvas>
-        <div id="prizePointer"></div>
+        <div class="list-group list-group-flush overflow-auto"
+             id="ruleList">
+        </div>
     </div>
-    <script>
-        window.segments = {rules.raw};
-    </script>
-    <script src="/js/myWheel.js"></script>
+    <div class="wheel-wrapper">
+        <div id="canvasContainer">
+            <canvas id="canvas" width="600" height="600"></canvas>
+            <div id="prizePointer"></div>
+        </div>
+        <script>
+            window.segments = {rules.raw};
+        </script>
+        <script src="/js/myWheel.js"></script>
 
-    <button class="btn btn-primary btn-lg spin-btn"
-            onClick="theWheel.rotationAngle = 0; theWheel.startAnimation();">
-        Spin the Wheel
-    </button>
+        <button class="btn btn-primary btn-lg spin-btn"
+                onClick="theWheel.rotationAngle = 0; theWheel.startAnimation();">
+            Spin the Wheel
+        </button>
+    </div>
 </div>
+
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newRuleModal">
     Add Rule
 </button>
 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteRuleModal">
     Delete Rule
 </button>
-
-<div class="card mt-4" style="max-width: 400px;">
-    <div class="card-header">
-        Current Rules
-    </div>
-
-    <div class="list-group list-group-flush overflow-auto"
-         id="ruleList"
-         style="max-height: 300px;">
-    </div>
-</div>
 
 <div class="modal fade" id="resultModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
@@ -57,10 +56,10 @@
 
             <div class="modal-body text-center">
                 <h4 id="resultText" class="fw-bold mb-3"></h4>
-
                 <h5 class="mt-3">Rule Description</h5>
-
-                <p id="resultDescription" class="text-muted"></p>
+                <div id="resultDescription"
+                     class="border rounded bg-light p-3 text-start">
+                </div>
             </div>
 
             <div class="modal-footer">

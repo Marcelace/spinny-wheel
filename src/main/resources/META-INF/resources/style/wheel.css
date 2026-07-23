@@ -5,6 +5,34 @@ body {
     background-repeat: no-repeat;
 }
 
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.rule-card {
+    width: 300px;
+    background: rgba(30, 30, 30, 0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    color: white;
+}
+
+.rule-header {
+    background: transparent;
+    color: gold;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#ruleList {
+    max-height: 700px;
+}
+
 .wheel-wrapper {
     position: relative;
     width: 600px;
@@ -42,22 +70,21 @@ body {
     width: 0;
     height: 0;
     border-top: 30px solid transparent;
-    border-right: 60px solid black;
+    border-right: 60px solid greenyellow;
     border-bottom: 30px solid transparent;
+    z-index: 2;
 }
 
 /* Arrow shaft */
 #prizePointer::after {
     content: "";
     position: absolute;
-    left: 60px;
+    left: 58px;
     top: -15px;
     width: 30px;
     height: 25px;
-    background: black;
-}
-
-#mainHeader {
-    color: yellow;
+    background: greenyellow;
+    border-left: transparent;
+    z-index: 1;
 }
 

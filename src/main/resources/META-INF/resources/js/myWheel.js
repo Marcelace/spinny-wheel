@@ -1,7 +1,7 @@
 let segments = window.segments;
 
 const coloredSegments = segments.map((segment, i) => {
-        const hue = (i * 360) / segments.length;
+        const hue = (i % 10 * 360) / 10;
         return {
             ...segment,
             fillStyle: "hsl(" + hue + ", 70%, 60%)"
