@@ -1,6 +1,9 @@
 html,
 body {
-    min-height: 100vh;
+    body {
+        min-height: 100vh;
+        background-attachment: fixed;
+    }
 }
 
 body {
@@ -46,8 +49,8 @@ body {
 
 #canvasContainer {
     position: relative;
-    width: 600px;
-}
+    width: min(90vw, 600px);
+    height: auto;}
 
 .spin-btn {
     position: absolute;
