@@ -1,9 +1,6 @@
 html,
 body {
-    body {
-        min-height: 100vh;
-        background-attachment: fixed;
-    }
+    min-height: 100vh;
 }
 
 body {
@@ -12,12 +9,14 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
 .main-content {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 50px;
+    gap: 100px;
     margin-top: 40px;
 }
 
@@ -42,9 +41,14 @@ body {
 
 
 .wheel-wrapper {
-    position: relative;
-    width: 600px;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 150px;
+}
+
+.spin-btn {
+    position: static;
+    transform: none;
 }
 
 #canvasContainer {
@@ -52,20 +56,13 @@ body {
     width: min(90vw, 600px);
     height: auto;}
 
-.spin-btn {
-    position: absolute;
-    left: 100%;
-    top: 50%;
-    transform: translate(200px, -50%);
-}
-
 #canvas {
     z-index: 1;
 }
 
 #prizePointer {
     position: absolute;
-    left: 100%;
+    right: -0px;
     top: 50%;
     z-index: 999;
 }
